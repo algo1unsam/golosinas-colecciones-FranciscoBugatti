@@ -1,1 +1,48 @@
+import golosinas.*
 
+test "bombon" {
+	
+	assert.equals( 5 , bombon.precio())
+    assert.equals("frutilla" , bombon.sabor())
+    assert.equals(15 , bombon.pesoGr())
+    assert.equals(0 , bombon.gluten())
+}
+test "alfajor" {
+	
+	assert.equals( 12 , alfajor.precio())
+    assert.equals("chocolate" , alfajor.sabor())
+    assert.equals(300 , alfajor.pesoGr())
+    assert.equals(1 , alfajor.gluten())
+}
+test "caramelo" {
+	
+	assert.equals( 1 , caramelo.precio())
+    assert.equals("frutilla" , caramelo.sabor())
+    assert.equals(5 , caramelo.pesoGr())
+    assert.equals(0 , caramelo.gluten())
+}
+test "chupetin" {
+	
+	assert.equals( 1 , chupetin.precio())
+    assert.equals("naranja" , chupetin.sabor())
+    assert.equals(5 , chupetin.pesoGr())
+    assert.equals(0 , chupetin.gluten())
+}
+test "oblea" {
+	
+	assert.equals( 5 , oblea.precio())
+    assert.equals("vainilla" , oblea.sabor())
+    assert.equals(250 , oblea.pesoGr())
+    assert.equals(1 , oblea.gluten())
+}
+test "choco" {
+	choco.pesoGr(40)
+	assert.equals( 20 , choco.precio())
+    assert.equals("vainilla" , choco.sabor())
+    assert.equals(1 , choco.gluten())
+
+    choco.pesoGr(100)
+	assert.equals( 50 , choco.precio())
+    assert.equals("vainilla" , choco.sabor())
+    assert.equals(1 , choco.gluten())
+}
