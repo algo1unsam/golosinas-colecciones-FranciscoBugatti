@@ -125,3 +125,24 @@ object vainilla {
 }
 
 
+//PARTE2//////////////////
+//map() transforma
+//personas.map({persona => persona.edad()})
+//en este caso transforma de lista de "objetos" a una 
+//lista de numeros con susm respectivas edades
+//.asSet() combierte a conjunto una lista
+//.asList() combierte a lista un conjunto
+
+object mariano {
+  var property bolsa = []
+  var property plata = 99999
+
+  method comprar(unaGolosina) {}
+  method desechar(unaGolosina) {}
+  method probarGolosinas() {}
+  method hayGolosinaSinTACC() {}
+  method preciosCuidados() {}
+  method golosinaDeSabor(unSabor) {}
+  method golosinasDeSabor(unSabor) {}
+  method sabores() {}
+}

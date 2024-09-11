@@ -46,3 +46,14 @@ test "choco" {
     assert.equals("vainilla" , choco.sabor())
     assert.equals(1 , choco.gluten())
 }
+test "tutti" {
+	tutti.gluten(0)
+	assert.equals( 7 , tutti.precio())
+    assert.equals(naranja , tutti.sabor())
+    assert.equals(250 , tutti.pesoGr())
+
+    tutti.gluten(1)
+	assert.equals( 10 , tutti.precio())
+    assert.equals(naranja , tutti.sabor())
+    assert.equals(250 , tutti.pesoGr())
+}
