@@ -60,10 +60,19 @@ object oblea {
     }
 }
 object choco {
-    var property precio = (0.5 * self.pesoGr())
-    const property sabor = chocolate
-    var property pesoGr = 0
     const property gluten = 1
+    var property sabor = chocolate
+    var pesoGr = 0
+    var pesoGr_inicial = 0
+    var property precio = 0
+
+    method peso() = pesoGr
+    method peso(valor) {
+        pesoGr = valor
+        pesoGr_inicial = valor
+        precio = valor * 0.5
+    }
+
 
     method comer(mordisco) {
       pesoGr = pesoGr - (mordisco * 2)
@@ -136,6 +145,9 @@ object naranja {
 object vainilla {
     method proximo () = self
 }
+object melon {
+  
+}
 
 
 //PARTE2//////////////////
@@ -164,7 +176,7 @@ object mariano {
     var nose = bolsa.any({golosina => golosina.gluten() == 0 })
     return nose
   }
-  method preciosCuidados() {
+  method barato() {
     var nose = bolsa.all({golosina => golosina.precio() <= 10 })
     return nose
   }
@@ -190,6 +202,7 @@ object mariano {
     var nose2 = bolsa.find({golosina => golosina.precio() == nose })
     return nose2
   }
+//  method golosinaMasCara() = bolsa.max{golosina => golosina.precio()}
   method pesoGolosinas(){
     var pesos = []
     bolsa.forEach{ golosina => pesos.add(golosina.pesoGr())}
@@ -199,10 +212,12 @@ object mariano {
   method golosinasFaltantes(golosinas_deseadas) {
   var nose= #{}
   nose = golosinas_deseadas.filter({golosina => !bolsa.contains(golosina)})
+  return nose
  }
  method gustosFaltantes(gustos_deseados) {
   var nose= #{}
   nose = gustos_deseados.filter({golosina => !bolsa.contains(golosina.sabor())})
+  return nose
  }
 }
 // mariano.comprar(bombon)
