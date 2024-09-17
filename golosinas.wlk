@@ -1,6 +1,6 @@
 object bombon {
     const property precio = 5
-    const property sabor = "frutilla"
+    const property sabor = frutilla
     var property pesoGr = 15
     const property gluten = 0
 
@@ -11,7 +11,7 @@ object bombon {
 }
 object alfajor {
     const property precio = 12
-    const property sabor = "chocolate"
+    const property sabor = chocolate
     var property pesoGr = 300
     const property gluten = 1
 
@@ -22,7 +22,7 @@ object alfajor {
 }
 object caramelo {
     const property precio = 1
-    const property sabor = "frutilla"
+    const property sabor = frutilla
     var property pesoGr = 5
     const property gluten = 0
 
@@ -33,7 +33,7 @@ object caramelo {
 }
 object chupetin {
     const property precio = 2
-    const property sabor = "naranja"
+    const property sabor = naranja
     var property pesoGr = 7
     const property gluten = 0
 
@@ -46,7 +46,7 @@ object chupetin {
 }
 object oblea {
     const property precio = 5
-    const property sabor = "vainilla"
+    const property sabor = vainilla
     var property pesoGr = 250
     const property gluten = 1
 
@@ -61,7 +61,7 @@ object oblea {
 }
 object choco {
     var property precio = (0.5 * self.pesoGr())
-    const property sabor = "chocolate"
+    const property sabor = chocolate
     var property pesoGr = 0
     const property gluten = 1
 
@@ -103,12 +103,25 @@ object tutti {
     var property sabor = naranja
     const property pesoGr = 5
     var property gluten = 0
+    var property cont = 0
     //const property sabores = ["frutilla","chocolate","naranja"]
     //tutti.sabores().get(0) para devolver "frutilla", o tutti.sabores().first()
 
-    method morder() {
-        sabor = sabor.proximo()
+    method comer(mordisco) {
+        cont = mordisco
+       // sabor = sabor.proximo()
+        if (cont > 1){
+          self.mordiscos(cont)
+        }else if (cont == 1){
+          sabor = sabor.proximo()
+        }
         return sabor
+    }
+
+    method mordiscos(mordisco) {
+      sabor = sabor.proximo()
+      cont -= 1
+      self.comer(cont)
     }
 }
 object frutilla {
@@ -137,12 +150,66 @@ object mariano {
   var property bolsa = []
   var property plata = 99999
 
-  method comprar(unaGolosina) {}
-  method desechar(unaGolosina) {}
-  method probarGolosinas() {}
-  method hayGolosinaSinTACC() {}
-  method preciosCuidados() {}
-  method golosinaDeSabor(unSabor) {}
-  method golosinasDeSabor(unSabor) {}
-  method sabores() {}
+  method comprar(unaGolosina) {
+    bolsa.add(unaGolosina)
+    plata -= unaGolosina.precio()
+  }
+  method desechar(unaGolosina) {
+    bolsa.remove(unaGolosina)
+  }
+  method probarGolosinas(mordisco) {
+    bolsa.forEach{ golosina => golosina.comer(mordisco)}
+  }
+  method hayGolosinaSinTACC() {
+    var nose = bolsa.any({golosina => golosina.gluten() == 0 })
+    return nose
+  }
+  method preciosCuidados() {
+    var nose = bolsa.all({golosina => golosina.precio() <= 10 })
+    return nose
+  }
+  method golosinaDeSabor(unSabor) {
+    var nose = #{}
+    nose = bolsa.find({golosina => golosina.sabor() == unSabor })
+    return nose
+  }
+  method golosinasDeSabor(unSabor) {
+    var nose = #{}
+    nose = bolsa.filter({golosina => golosina.sabor() == unSabor })
+    return nose
+  }
+  method sabores() {
+    var sabrozo = #{}
+    bolsa.forEach{ golosina => sabrozo.add(golosina.sabor())}
+    return sabrozo
+  }
+  method golosinaMasCara() {
+    var precios = #{}
+    bolsa.forEach{ golosina => precios.add(golosina.precio())}
+    var nose = precios.max()
+    var nose2 = bolsa.find({golosina => golosina.precio() == nose })
+    return nose2
+  }
+  method pesoGolosinas(){
+    var pesos = []
+    bolsa.forEach{ golosina => pesos.add(golosina.pesoGr())}
+    var nose = pesos.sum()
+    return nose
+  } 
+  method golosinasFaltantes(golosinas_deseadas) {
+  var nose= #{}
+  nose = golosinas_deseadas.filter({golosina => !bolsa.contains(golosina)})
+ }
+ method gustosFaltantes(gustos_deseados) {
+  var nose= #{}
+  nose = gustos_deseados.filter({golosina => !bolsa.contains(golosina.sabor())})
+ }
 }
+// mariano.comprar(bombon)
+// mariano.desechar()
+// mariano.probarGolosinas()
+// mariano.hayGolosinaSinTACC()
+// mariano.preciosCuidados()
+// mariano.golosinaDeSabor(frutilla)
+// mariano.golosinasDeSabor()
+// mariano.sabores()
