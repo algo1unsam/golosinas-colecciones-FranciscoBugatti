@@ -1,1 +1,106 @@
 
+import golosinas.*
+
+test "bombon" {
+	
+	assert.equals( 5 , bombon.precio())
+    assert.equals(frutilla , bombon.sabor())
+    assert.equals(15 , bombon.pesoGr())
+    assert.equals(0 , bombon.gluten())
+}
+test "alfajor" {
+	
+	assert.equals( 12 , alfajor.precio())
+    assert.equals(chocolate , alfajor.sabor())
+    assert.equals(300 , alfajor.pesoGr())
+    assert.equals(1 , alfajor.gluten())
+}
+test "caramelo" {
+	
+	assert.equals( 1 , caramelo.precio())
+    assert.equals(frutilla , caramelo.sabor())
+    assert.equals(5 , caramelo.pesoGr())
+    assert.equals(0 , caramelo.gluten())
+}
+test "chupetin" {
+	
+	assert.equals( 2 , chupetin.precio())
+    assert.equals(naranja , chupetin.sabor())
+    assert.equals(7 , chupetin.pesoGr())
+    assert.equals(0 , chupetin.gluten())
+}
+test "oblea" {
+	
+	assert.equals( 5 , oblea.precio())
+    assert.equals(vainilla , oblea.sabor())
+    assert.equals(250 , oblea.pesoGr())
+    assert.equals(1 , oblea.gluten())
+}
+test "choco" {
+	choco.peso(40)
+	assert.equals( 20 , choco.precio())
+    assert.equals(chocolate , choco.sabor())
+    assert.equals(1 , choco.gluten())
+
+    choco.peso(100)
+	assert.equals( 50 , choco.precio())
+    assert.equals(chocolate , choco.sabor())
+    assert.equals(1 , choco.gluten())
+}
+test "tutti" {
+	tutti.gluten(0)
+	assert.equals( 7 , tutti.precio())
+    tutti.comer(2)
+    assert.equals(chocolate , tutti.sabor())
+    assert.equals(250 , tutti.pesoGr())
+
+    tutti.gluten(1)
+	assert.equals( 10 , tutti.precio())
+    tutti.comer(2)
+    assert.equals(chocolate , tutti.sabor())
+    assert.equals(250 , tutti.pesoGr())
+}
+test "banada" {
+    banada.banar(tutti)
+    banada.gluten(1)
+    assert.equals( 12 , tutti.precio())
+    assert.equals(254 , tutti.pesoGr())
+    tutti.comer(2)
+    assert.equals(chocolate , tutti.sabor())
+    
+    choco.peso(100)
+    banada.banar(choco)
+    assert.equals( 52 , tutti.precio())
+    assert.equals(104 , tutti.pesoGr())
+    
+    banada.banar(chupetin)
+    assert.equals( 4 , chupetin.precio())
+    assert.equals(naranja , chupetin.sabor())
+    assert.equals(11 , chupetin.pesoGr())
+    assert.equals(0 , chupetin.gluten())
+}
+test "mariano" {
+    choco.peso(100000)
+    mariano.comprar(choco)
+    mariano.comprar(caramelo)
+    mariano.comprar(bombon)
+    //mariano.probarGolosinas(1)
+    //assert.equals( true , mariano.hayGolosinaSinTACC())
+    //assert.equals(True , mariano.barato())
+    assert.equals(choco , mariano.golosinaDeSabor(chocolate))
+    //mariano.sabores()
+    assert.equals(choco , mariano.golosinaMasCara())
+    //mariano.pesoGolosinas()
+
+}
+test "buscar bolsa"{
+    choco.peso(100000)
+    mariano.comprar(choco)
+    mariano.comprar(caramelo)
+    mariano.comprar(bombon)
+    //mariano.golosinasFaltantes(#{alfajor, bombon, choco, chupetin})
+    //mariano.gustosFaltantes(#{melon, chocolate, frutilla , vainilla})
+    assert.equals(#{alfajor,chupetin} , mariano.golosinasFaltantes(#{alfajor, bombon, choco, chupetin}))
+    assert.equals(#{melon, vainilla} , mariano.gustosFaltantes(#{melon, chocolate, frutilla , vainilla}))
+
+}
